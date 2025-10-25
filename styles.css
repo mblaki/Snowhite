@@ -104,6 +104,66 @@ input,textarea{
 
 .site-footer{border-top:1px solid #e6eef6;padding:14px 0;background:#fff}
 
+/* Navigation Enhancements */
+.nav-wrapper {
+  position: relative;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--blue);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-menu a {
+  font-weight: 600;
+}
+
+/* --- MOBILE STYLES --- */
+@media (max-width: 800px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e6eef6;
+    display: none;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-menu a {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #eef3f8;
+  }
+
+  .nav-contact {
+    margin-top: 0.5rem;
+  }
+}
+
+
 @media (max-width: 800px){
   .hours-grid,.contact-grid{grid-template-columns:1fr}
 }
