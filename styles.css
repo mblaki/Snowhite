@@ -163,6 +163,91 @@ input,textarea{
   }
 }
 
+/* Ensure the header layout is consistent */
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e6eef6;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  display: block;
+  max-height: 60px;         /* Desktop height */
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Controls the business name and tagline */
+.brand .name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.brand .name strong {
+  font-size: 1.4rem;
+}
+
+.brand .name span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 800px) {
+  .logo img {
+    max-height: 45px;      /* Slightly smaller on mobile */
+  }
+  .brand .name strong {
+    font-size: 1.2rem;
+  }
+  .brand .name span {
+    font-size: 0.8rem;
+  }
+}
+
+/* ✅ Optional: keep header layout nicely aligned */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* In case logo is very wide, constrain width without distorting proportions */
+.logo {
+  max-width: 200px;        /* Prevents huge scaling issues */
+  flex-shrink: 0;
+}
+
+@media (max-width: 800px) {
+  .logo {
+    max-width: 160px;
+  }
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 800px) {
+  .site-header .brand {
+    justify-content: center;
+  }
+}
+
+
 
 @media (max-width: 800px){
   .hours-grid,.contact-grid{grid-template-columns:1fr}
