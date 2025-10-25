@@ -223,10 +223,24 @@ input,textarea{
   justify-content: space-between;
 }
 
-/* In case logo is very wide, constrain width without distorting proportions */
+/* In case logo is very wide, constrain width without distorting proportions
 .logo {
-  max-width: 200px;        /* Prevents huge scaling issues */
+  max-width: 200px;        /* Prevents huge scaling issues
   flex-shrink: 0;
+}
+*/
+
+/* Make logo container flex just enough to match height */
+.logo {
+  height: 100%; /* Fills full height of .brand */
+  display: flex;
+  align-items: center; /* Centers image inside */
+}
+
+
+.brand {
+  display: flex;
+  align-items: center; /* ensures vertical alignment */
 }
 
 @media (max-width: 800px) {
@@ -235,10 +249,25 @@ input,textarea{
   }
 }
 
-.logo img {
+/*.logo img {
   max-width: 100%;
   height: auto;
   object-fit: contain;
+} */
+
+/* Make image match parent height */
+.logo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain; /* Keeps proportions */
+  display: block;
+}
+
+/* Ensure the .brand container naturally sizes by its tallest content (the text) */
+.name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (max-width: 800px) {
