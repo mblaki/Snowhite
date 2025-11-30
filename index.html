@@ -83,33 +83,124 @@
   <script>
     (function(){
       // ---- Config: update BASE if your images live elsewhere ----
-      const BASE = "assets/"; // e.g. "https://yourdomain.com/assets/"
+      const BASE = "https://mblaki.github.io/Snowhite/assets/";
 
       // ---- Data (10 works; 2 artists: Billy 1–5, Fok 6–10) ----
       const ARTISTS = {
-        Billy: {
-          bio: "Billy is a Cape Town painter who chases light like a cartographer of dreams. His 'Wolf Moon' series maps memory to colour.",
-          email: "billy@example.com",
+        Peter Southworth: {
+          bio: "Peter is a lekke ou, when he's not making art he's slukking branewyn en coke like they going to run out tomorrow.",
+          email: "peter@example.com",
           whatsapp: "+27 12 345 6789"
         },
-        Fok: {
-          bio: "Fok is a mixed-media minimalista known for brutal simplicity. He hunts silence in noisy places, then frames it with gold.",
-          email: "fok@example.com",
+        Adriaan S de Lange: {
+          bio: "I've personally never met Adriaan, but he sounds like a decent oke... Or she, IDK..",
+          email: "adriaan@example.com",
           whatsapp: "+27 98 765 4321"
-        }
+        },
+        Toinette Lindley: {
+          bio: "Toinette has magic hands/fingers! Oh MY word! You must see what she can do with them.",
+          email: "toinette@example.com",
+          whatsapp: "+27 33 333 3333"
+        },
+        Nicole Liebenberg: {
+          bio: "Nicole likes it wet and wild, if it's waterbased she'll use it - if you know what i mean.",
+          email: "nicole@example.com",
+          whatsapp: "+27 44 444 4444"
+        },
+        Christi Roux: {
+          bio: "A chakra-shaking throat-singer whose tiny photos channel big spiritual chaos. A proud advocate for radical self-expression, he believes every soul deserves to vibrate loudly and fabulously.",
+          email: "christi@example.com",
+          whatsapp: "+27 44 444 4444"
+        },
       };
 
       const WORKS = [
-        { id:"img1", file: BASE+"image1.png",  title:"Wolf Moon I",       artist:"Billy", year:2024, medium:"Oil on canvas",         dimensions:"50 × 70 cm", price:6800, available:true },
-        { id:"img2", file: BASE+"image2.png",  title:"Wolf Moon II",      artist:"Billy", year:2024, medium:"Oil on canvas",         dimensions:"60 × 60 cm", price:7200, available:true },
-        { id:"img3", file: BASE+"image3.png",  title:"Salt & Saffron",    artist:"Billy", year:2023, medium:"Acrylic on linen",       dimensions:"45 × 60 cm", price:5400, available:false },
-        { id:"img4", file: BASE+"image4.png",  title:"Signal at Dusk",    artist:"Billy", year:2025, medium:"Mixed media",            dimensions:"70 × 70 cm", price:8400, available:true },
-        { id:"img5", file: BASE+"image5.png",  title:"Gold Weather",      artist:"Billy", year:2025, medium:"Oil on board",           dimensions:"40 × 50 cm", price:4800, available:true },
-        { id:"img6", file: BASE+"image6.png",  title:"Quiet Animal",      artist:"Fok",   year:2024, medium:"Charcoal & leaf",        dimensions:"42 × 59 cm", price:6100, available:true },
-        { id:"img7", file: BASE+"image7.png",  title:"Frame the Silence", artist:"Fok",   year:2025, medium:"Ink on handmade paper",  dimensions:"56 × 76 cm", price:7600, available:false },
-        { id:"img8", file: BASE+"image8.png",  title:"Night Taxonomy",    artist:"Fok",   year:2023, medium:"Acrylic & graphite",     dimensions:"50 × 65 cm", price:5900, available:true },
-        { id:"img9", file: BASE+"image9.png",  title:"Static Gold",       artist:"Fok",   year:2025, medium:"Mixed media",            dimensions:"55 × 70 cm", price:8300, available:true },
-        { id:"img10",file: BASE+"image10.png", title:"Object 10",         artist:"Fok",   year:2024, medium:"Oil & pencil",           dimensions:"40 × 60 cm", price:5200, available:true },
+        {
+            id:"img1",
+            file: BASE+"bloekomboom.jpg",
+            title:"Bloekombook",
+            artist:"Peter Southworth",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"10 × 10 cm",
+            price:350,
+            available:true
+        },
+        {
+            id:"img2",
+            file: BASE+"grotto_beach_skies.jpg",
+            title:"Grotto Beach Skies",
+            artist:"Peter Southworth",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"8 × 6 cm",
+            price:300,
+            available:true
+        },
+        {
+            id:"img3",
+            file: BASE+"lagoon.jpg",
+            title:"Lagoon",
+            artist:"Peter Southworth",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"8 × 6 cm",
+            price:300,
+            available:false
+        },
+        {
+            id:"img4",
+            file: BASE+"grotto_beach.jpg",
+            title:"Grotto Beach",
+            artist:"Peter Southworth",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"10 × 8 cm",
+            price:450,
+            available:true
+        },
+        {
+            id:"img5",
+            file: BASE+"daffodils.jpg",
+            title:"Daffodils",
+            artist:"Peter Southworth",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"6 × 8 cm",
+            price:200,
+            available:true
+        },
+        {
+            id:"img6",
+            file: BASE+"yet_another_day.jpg",
+            title:"Yet Another Day",
+            artist:"Adriaan S de Lange",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"10 × 10 cm",
+            price:800,
+            available:true
+        },
+            id:"img7",
+            file: BASE+"waiting_no_more.jpg",
+            title:"Waiting No More",
+            artist:"Adriaan S de Lange",
+            year:2025,
+            medium:"Oil on canvas",
+            dimensions:"12 × 9 cm",
+            price:950,
+            available:true
+        },
+            id:"img8",
+            file: BASE+"owl_front_1.jpg",
+            title:"Mouse!",
+            artist:"Toinette Lindley",
+            year:2025,
+            medium:"Clay",
+            dimensions:"6.5 × 11.5 cm",
+            price:700,
+            available:true
+        }
       ];
 
       // ---- Elements ----
