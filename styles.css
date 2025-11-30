@@ -145,10 +145,13 @@ img {
   align-items: center;
   height: 100%;
 }
+
+/* Logo fills the same height as the text block */
 .logo img {
-  height: 100%;
-  width: auto;
+  height: 100%;     /* Match parent container height */
+  width: auto;      /* Keep aspect ratio */
   object-fit: contain;
+  display: block;
 }
 
 .name {

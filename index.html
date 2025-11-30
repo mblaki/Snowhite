@@ -1,256 +1,206 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Snowhite Laundry — Keep Calm, We Can Handle It</title>
-  <meta name="description" content="Snowhite Laundry in Somerset West (Helderberg). Washing, drying, ironing, large items, dry cleaning, pet linen, dyeing, alterations & mending. Easy WhatsApp quotes and quick turnaround." />
-  <meta name="theme-color" content="#0d47a1" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230d47a1'/%3E%3Ctext x='50' y='60' font-size='44' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'%3ES%3C/text%3E%3C/svg%3E" />
-  <meta property="og:title" content="Snowhite Laundry — Somerset West" />
-  <meta property="og:description" content="Local, reliable laundry services. Washing, drying, ironing, large items, alterations. WhatsApp for quotes." />
-  <meta property="og:image" content="assets/price-list.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_ZA" />
-  <link rel="canonical" href="https://mblaki.github.io/Snowhite/" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Snowhite Laundry",
-    "image": "https://mblaki.github.io/Snowhite/assets/price-list.png",
-    "telephone": "+27 82 472 9429",
-    "email": "mblaki69@gmail.com@gmail.com",
-    "priceRange": "R",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "9 Oudehuis St, Martinville",
-      "addressLocality": "Somerset West",
-      "addressRegion": "Western Cape",
-      "postalCode": "7130",
-      "addressCountry": "ZA"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "-34.082",
-      "longitude": "18.851"
-    },
-    "openingHoursSpecification": [
-      {"@type": "OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"18:00"},
-      {"@type": "OpeningHoursSpecification","dayOfWeek":["Saturday"],"opens":"07:00","closes":"14:00"}
-    ],
-    "url": "https://mblaki.github.io/Snowhite/",
-    "sameAs": [
-      "https://sites.google.com/view/Snowhite/home",
-      "https://www.facebook.com/snowhitelaundrette/"
-    ]
-  }
-  </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Little Wolf Museum</title>
+<meta name="description" content="Little Wolf Museum — a tiny online gallery showcasing contemporary works by emerging artists Billy and Fok." />
+<meta property="og:title" content="Little Wolf Museum" />
+<meta property="og:description" content="A tiny online gallery connecting viewers with artists." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/" />
+<meta name="theme-color" content="#0A0A0A" />
+<link rel="icon" href="assets/logo.png" />
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-      <div class="container row nav-wrapper">
-          <div class="brand">
-              <div class="logo">
-                  <img src="assets/snowhite-logo.jpg" alt="Snowhite Laundry Logo" />
-              </div>
-              <div class="name">
-                  <strong>Snowhite Laundry</strong>
-                  <span>Keep Calm, We Can Handle It</span>
-              </div>
-          </div>
+<!-- Little Wolf Museum – Drop-in Gallery Block -->
+<div id="lwm-gallery" role="region" aria-label="Little Wolf Museum Gallery">
+  <style>
+    /* ---- Scoped styles ---- */
+    #lwm-gallery { --gold:#C9A227; --black:#0A0A0A; --white:#fff; --muted:#f3f2ed; --radius:14px; --shadow:0 10px 24px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.08); font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:var(--black); }
+    #lwm-gallery .lg-wrap{max-width:1100px;margin:0 auto;padding:20px;}
+    #lwm-gallery h2{margin:0 0 12px;font-size:28px;}
+    #lwm-gallery .grid{display:grid;gap:12px}
+    @media(min-width:540px){#lwm-gallery .grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:860px){#lwm-gallery .grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1100px){#lwm-gallery .grid{grid-template-columns:repeat(4,1fr)}}
+    #lwm-gallery .card{background:#fff;border:1px solid #ececec;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    #lwm-gallery .thumb{aspect-ratio:4/3;background:#fafafa;overflow:hidden}
+    #lwm-gallery .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    #lwm-gallery .meta{padding:12px 14px 14px}
+    #lwm-gallery .title{font-weight:700;margin-bottom:4px}
+    #lwm-gallery .artist{opacity:.85}
+    #lwm-gallery .price{margin-top:6px;font-weight:700}
+    #lwm-gallery .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid #e6e6e6;background:var(--white);cursor:pointer;text-decoration:none;font-weight:600}
+    #lwm-gallery .btn.gold{background:var(--gold);border-color:var(--gold);color:#161616}
+    #lwm-gallery .btn.gold:hover{filter:brightness(.95)}
+    #lwm-gallery .btn:focus{outline:3px solid #2E90FA;outline-offset:2px}
+    /* Modal */
+    #lwm-gallery .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:999999}
+    #lwm-gallery .overlay[aria-hidden="false"]{display:flex}
+    #lwm-gallery .dialog{width:min(100%,940px);max-height:90vh;background:#fff;border-radius:18px;overflow:hidden;display:grid;grid-template-columns:1fr;box-shadow:var(--shadow)}
+    @media(min-width:860px){#lwm-gallery .dialog{grid-template-columns:1.15fr .85fr}}
+    #lwm-gallery .left{background:#000}
+    #lwm-gallery .left img{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+    #lwm-gallery .right{padding:16px 16px 18px;overflow:auto}
+    #lwm-gallery .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--muted);margin:4px 0 8px}
+    #lwm-gallery .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+    #lwm-gallery .close{position:absolute;top:16px;right:16px}
+  </style>
 
-          <!-- Mobile Menu Toggle Button -->
-          <button class="nav-toggle" aria-label="Toggle navigation">
-              ☰
-          </button>
+  <div class="lg-wrap">
+    <h2>Gallery</h2>
+    <div class="grid" id="lwm-grid" aria-live="polite"></div>
+  </div>
 
-          <nav aria-label="Main" class="nav-menu">
-              <a href="#services">Services</a>
-              <a href="#pricing">Prices</a>
-              <a href="#location">Location</a>
-              <a href="#hours">Hours</a>
-              <a href="#contact" class="btn btn-primary nav-contact">Contact</a>
-          </nav>
+  <!-- Modal -->
+  <div id="lwm-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lwm-dlg-title">
+    <div class="dialog" role="document">
+      <button id="lwm-dlg-close" class="btn close" aria-label="Close details">✕</button>
+      <div class="left"><img id="lwm-dlg-img" alt="" /></div>
+      <div class="right">
+        <h3 id="lwm-dlg-title" style="margin:6px 0 4px;font-size:24px"></h3>
+        <div id="lwm-dlg-artist" class="pill"></div>
+        <div class="meta-row">
+          <div><strong>Medium:</strong> <span id="lwm-dlg-medium"></span></div>
+          <div><strong>Year:</strong> <span id="lwm-dlg-year"></span></div>
+          <div><strong>Dimensions:</strong> <span id="lwm-dlg-dim"></span></div>
+          <div><strong>Price:</strong> <span id="lwm-dlg-price"></span></div>
+        </div>
+        <p id="lwm-dlg-bio" style="margin-top:8px"></p>
+        <div class="meta-row">
+          <div><strong>Availability:</strong> <span id="lwm-dlg-avail"></span></div>
+          <div><strong>Contact:</strong> <span id="lwm-dlg-contact"></span></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <button class="btn" id="lwm-prev">◀ Prev</button>
+          <button class="btn" id="lwm-next">Next ▶</button>
+        </div>
       </div>
-  </header>
-
-
-  <section class="hero">
-    <div class="container">
-      <h1>Local laundry you can trust in Somerset West</h1>
-      <p>Washing, drying, ironing, large items, pet linen, dyeing, alterations & mending. Friendly, fast, and affordable.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="https://wa.me/27824729429?text=Hi%20Snowhite%20Laundry!%20I'd%20like%20a%20quote." target="_blank" rel="noopener">WhatsApp to enquire!</a>
-        <a class="btn btn-secondary" href="tel:+27824729429">Call 082 472 9429</a>
-      </div>
-      <ul class="badges">
-        <li>✅ Same-day options</li>
-        <li>✅ Large items & comforters</li>
-        <li>✅ Alterations & mending</li>
-      </ul>
     </div>
-  </section>
+  </div>
 
-  <main id="main">
-    <section id="services" class="section">
-      <div class="container">
-        <h2>Services</h2>
-        <div class="grid">
-          <article class="card">
-            <h3>Wash • Dry • Fold</h3>
-            <p>Everyday laundry with care. Sorted and folded.</p>
-            <p class="price">From R80*</p>
-          </article>
-          <article class="card">
-            <h3>Ironing</h3>
-            <p>Per kilogram or items. Crisp finish.</p>
-            <p class="price">From R25/kg</p>
-          </article>
-          <article class="card">
-            <h3>Large Items</h3>
-            <p>Duvets, blankets, pillows, mats & more.</p>
-            <p class="price">From R150</p>
-          </article>
-          <article class="card">
-            <h3>Alterations & Mending</h3>
-            <p>Hems, zips, repairs, buttons.</p>
-            <p class="price">From R65</p>
-          </article>
-          <article class="card">
-            <h3>Dry Cleaning (Depot)</h3>
-            <p>Convenient drop-off & collection.</p>
-          </article>
-          <article class="card">
-            <h3>Pet Linen</h3>
-            <p>Freshen up pet bedding & blankets.</p>
-          </article>
-        </div>
-        <p class="muted">*Per 4kg dry load. See full price list below.</p>
-      </div>
-    </section>
+  <script>
+    (function(){
+      // ---- Config: update BASE if your images live elsewhere ----
+      const BASE = "assets/"; // e.g. "https://yourdomain.com/assets/"
 
-    <section id="pricing" class="section alt">
-      <div class="container">
-        <h2>Prices</h2>
-        <p>Clear, honest pricing in Rands. View highlights below and see the full list.</p>
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>Popular</h3>
-            <ul>
-              <li>Wash, Dry & Fold — <strong>R80*</strong></li>
-              <li>Wash only — <strong>R60*</strong></li>
-              <li>Drying only — <strong>R60**</strong></li>
-              <li>Ironing — <strong>R25/kg</strong></li>
-            </ul>
-            <small>*per 4kg dry load • **per machine</small>
-          </div>
-          <div class="pricing-card">
-            <h3>Large Items</h3>
-            <ul>
-              <li>Duvet inners & comforters — <strong>from R150</strong></li>
-              <li>Blankets (all sizes) — <strong>from R150</strong></li>
-              <li>Mats — <strong>from R80</strong></li>
-              <li>Pillows — <strong>from R60</strong></li>
-            </ul>
-          </div>
-          <div class="pricing-card">
-            <h3>Extras</h3>
-            <ul>
-              <li>Alterations/Mending — <strong>from R65</strong></li>
-              <li>Shorten hem — <strong>R65</strong></li>
-              <li>Replace zip — <strong>from R85/R120</strong></li>
-              <li>Wash sneakers — <strong>R80</strong></li>
-            </ul>
-          </div>
-        </div>
-        <figure class="price-image">
-          <img src="assets/price-list.png" alt="Snowhite Laundry full price list" />
-          <figcaption>Full price list (effective 1 Aug 2024). Large items and detailed options included.</figcaption>
-        </figure>
-        <div class="cta center">
-          <a class="btn btn-primary" href="https://wa.me/27824729429?text=Hi%20Snowhite%20Laundry!%20Can%20you%20confirm%20today%27s%20prices%20and%20turnaround%3F" target="_blank" rel="noopener">Enquire further on WhatsApp</a>
-        </div>
-      </div>
-    </section>
+      // ---- Data (10 works; 2 artists: Billy 1–5, Fok 6–10) ----
+      const ARTISTS = {
+        Billy: {
+          bio: "Billy is a Cape Town painter who chases light like a cartographer of dreams. His 'Wolf Moon' series maps memory to colour.",
+          email: "billy@example.com",
+          whatsapp: "+27 12 345 6789"
+        },
+        Fok: {
+          bio: "Fok is a mixed-media minimalista known for brutal simplicity. He hunts silence in noisy places, then frames it with gold.",
+          email: "fok@example.com",
+          whatsapp: "+27 98 765 4321"
+        }
+      };
 
-    <section id="location" class="section">
-      <div class="container">
-        <h2>Location</h2>
-        <p><strong>In-store:</strong> Oudehuis Shopping Centre,<br/>9 Oudehuis St, Martinville, Somerset West, 7130</p>
-        <div class="map-wrap">
-          <iframe title="Map to Snowhite Laundry" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=9%20Oudehuis%20St,%20Somerset%20West%207130&output=embed"></iframe>
-        </div>
-        <p class="muted">We serve Somerset West & the wider Helderberg area.</p>
-      </div>
-    </section>
+      const WORKS = [
+        { id:"img1", file: BASE+"image1.png",  title:"Wolf Moon I",       artist:"Billy", year:2024, medium:"Oil on canvas",         dimensions:"50 × 70 cm", price:6800, available:true },
+        { id:"img2", file: BASE+"image2.png",  title:"Wolf Moon II",      artist:"Billy", year:2024, medium:"Oil on canvas",         dimensions:"60 × 60 cm", price:7200, available:true },
+        { id:"img3", file: BASE+"image3.png",  title:"Salt & Saffron",    artist:"Billy", year:2023, medium:"Acrylic on linen",       dimensions:"45 × 60 cm", price:5400, available:false },
+        { id:"img4", file: BASE+"image4.png",  title:"Signal at Dusk",    artist:"Billy", year:2025, medium:"Mixed media",            dimensions:"70 × 70 cm", price:8400, available:true },
+        { id:"img5", file: BASE+"image5.png",  title:"Gold Weather",      artist:"Billy", year:2025, medium:"Oil on board",           dimensions:"40 × 50 cm", price:4800, available:true },
+        { id:"img6", file: BASE+"image6.png",  title:"Quiet Animal",      artist:"Fok",   year:2024, medium:"Charcoal & leaf",        dimensions:"42 × 59 cm", price:6100, available:true },
+        { id:"img7", file: BASE+"image7.png",  title:"Frame the Silence", artist:"Fok",   year:2025, medium:"Ink on handmade paper",  dimensions:"56 × 76 cm", price:7600, available:false },
+        { id:"img8", file: BASE+"image8.png",  title:"Night Taxonomy",    artist:"Fok",   year:2023, medium:"Acrylic & graphite",     dimensions:"50 × 65 cm", price:5900, available:true },
+        { id:"img9", file: BASE+"image9.png",  title:"Static Gold",       artist:"Fok",   year:2025, medium:"Mixed media",            dimensions:"55 × 70 cm", price:8300, available:true },
+        { id:"img10",file: BASE+"image10.png", title:"Object 10",         artist:"Fok",   year:2024, medium:"Oil & pencil",           dimensions:"40 × 60 cm", price:5200, available:true },
+      ];
 
-    <section id="hours" class="section alt">
-      <div class="container">
-        <h2>Hours</h2>
-        <div class="hours-grid">
-          <ul>
-            <li><strong>Mon–Fri:</strong> 7:00 – 18:00</li>
-            <li><strong>Saturday:</strong> 7:00 – 14:00</li>
-            <li><strong>Sunday:</strong> Closed</li>
-          </ul>
-          <div class="notice">
-            <p>Tip: Message us on WhatsApp for same-day options and large-item turnarounds.</p>
-            <a class="btn btn-secondary" href="https://wa.me/27824729429?text=Hi%20Snowhite%20Laundry!%20What%27s%20your%20next%20availability%3F" target="_blank" rel="noopener">Check availability</a>
-          </div>
-        </div>
-      </div>
-    </section>
+      // ---- Elements ----
+      const root = document.getElementById("lwm-gallery");
+      const grid = document.getElementById("lwm-grid");
+      const overlay = document.getElementById("lwm-overlay");
+      const dlgImg = document.getElementById("lwm-dlg-img");
+      const dlgTitle = document.getElementById("lwm-dlg-title");
+      const dlgArtist = document.getElementById("lwm-dlg-artist");
+      const dlgMedium = document.getElementById("lwm-dlg-medium");
+      const dlgYear = document.getElementById("lwm-dlg-year");
+      const dlgDim = document.getElementById("lwm-dlg-dim");
+      const dlgPrice = document.getElementById("lwm-dlg-price");
+      const dlgBio = document.getElementById("lwm-dlg-bio");
+      const dlgAvail = document.getElementById("lwm-dlg-avail");
+      const dlgContact = document.getElementById("lwm-dlg-contact");
+      const btnPrev = document.getElementById("lwm-prev");
+      const btnNext = document.getElementById("lwm-next");
+      const btnClose = document.getElementById("lwm-dlg-close");
+      let currentIndex = 0, lastFocused = null;
 
-    <section id="contact" class="section">
-      <div class="container">
-        <h2>Contact</h2>
-        <div class="contact-grid">
-          <form id="contact-form" class="card" aria-labelledby="contact-heading">
-            <label>
-              <span>Name</span>
-              <input type="text" name="name" required autocomplete="name"/>
-            </label>
-            <label>
-              <span>Phone or Email</span>
-              <input type="text" name="contact" required autocomplete="tel"/>
-            </label>
-            <label>
-              <span>What do you need?</span>
-              <textarea name="message" rows="5" placeholder="e.g., Wash & dry 8kg, iron 5 shirts, 1 queen duvet" required></textarea>
-            </label>
-            <label class="hide">
-              <span>Leave this empty</span>
-              <input type="text" name="_honeypot" tabindex="-1" autocomplete="off"/>
-            </label>
-            <button type="submit" class="btn btn-primary">Send</button>
-            <p class="muted small">We’ll reply during business hours. By contacting us you agree to our simple privacy note: we only use your details to respond to your enquiry.</p>
-          </form>
-          <div class="card">
-            <ul class="contact-list">
-              <li>📞 <a href="tel:+27824729429">082 472 9429</a></li>
-              <li>💬 <a href="https://wa.me/27824729429?text=Hi%20Snowhite%20Laundry!%20I'd%20like%20a%20quote." target="_blank" rel="noopener">WhatsApp</a></li>
-              <li>✉️ <a href="mailto:Margi.defreitas@gmail.com">Margi.defreitas@gmail.com</a></li>
-              <li>👍 <a href="https://www.facebook.com/snowhitelaundrette/" target="_blank" rel="noopener">Facebook</a></li>
-              <li>🌐 <a href="https://sites.google.com/view/snowhite-laundry/home" target="_blank" rel="noopener">Current Google Site</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+      // ---- Render grid ----
+      WORKS.forEach(w => grid.appendChild(card(w)));
 
-  <footer class="site-footer">
-    <div class="container row">
-      <p>© <span id="year"></span> Snowhite Laundry • Somerset West</p>
-      <p class="muted">Made with ❤️ • POPIA: we only keep enquiry details as long as needed to assist you.</p>
-    </div>
-  </footer>
-</body>
+      function card(w){
+        const el = document.createElement("article");
+        el.className = "card";
+        el.innerHTML = `
+          <div class="thumb"><img loading="lazy" src="${w.file}" alt="${w.title} by ${w.artist}"></div>
+          <div class="meta">
+            <div class="title">${w.title}</div>
+            <div class="artist">${w.artist} • ${w.year}</div>
+            <div class="price">R ${w.price.toLocaleString('en-ZA')}</div>
+            <button class="btn gold" data-open="${w.id}">View details</button>
+          </div>`;
+        el.querySelector("[data-open]").addEventListener("click",()=>openModal(w));
+        el.querySelector(".thumb").addEventListener("click",()=>openModal(w));
+        el.tabIndex = 0; el.addEventListener("keydown",e=>{ if(e.key==="Enter") openModal(w); });
+        return el;
+      }
+
+      // ---- Modal logic ----
+      function openModalByIndex(i){ openModal(WORKS[i]); }
+      function openModal(w){
+        currentIndex = WORKS.findIndex(x=>x.id===w.id);
+        lastFocused = document.activeElement;
+
+        dlgImg.src = w.file;
+        dlgImg.alt = `${w.title} by ${w.artist}`;
+        dlgTitle.textContent = w.title;
+        dlgArtist.textContent = w.artist;
+        dlgMedium.textContent = w.medium;
+        dlgYear.textContent = w.year;
+        dlgDim.textContent = w.dimensions;
+        dlgPrice.textContent = "R " + w.price.toLocaleString("en-ZA");
+        const a = ARTISTS[w.artist];
+        dlgBio.textContent = a.bio;
+        dlgAvail.textContent = w.available ? "Available" : "Sold";
+        dlgContact.textContent = `${a.email} · ${a.whatsapp}`;
+
+        overlay.setAttribute("aria-hidden","false");
+        document.body.style.overflow = "hidden";
+        btnClose.focus();
+      }
+      function closeModal(){
+        overlay.setAttribute("aria-hidden","true");
+        document.body.style.overflow = "";
+        if(lastFocused) lastFocused.focus();
+      }
+      function nav(dir){
+        currentIndex = (currentIndex + dir + WORKS.length) % WORKS.length;
+        openModalByIndex(currentIndex);
+      }
+
+      // Events
+      overlay.addEventListener("click",e=>{ if(e.target===overlay) closeModal(); });
+      btnClose.addEventListener("click", closeModal);
+      btnPrev.addEventListener("click", ()=>nav(-1));
+      btnNext.addEventListener("click", ()=>nav(1));
+      window.addEventListener("keydown", e=>{
+        if(overlay.getAttribute("aria-hidden")==="false"){
+          if(e.key==="Escape") closeModal();
+          if(e.key==="ArrowLeft") nav(-1);
+          if(e.key==="ArrowRight") nav(1);
+        }
+      });
+      // Touch swipe
+      let tx=null; overlay.addEventListener("touchstart",e=>{tx=e.changedTouches[0].clientX});
+      overlay.addEventListener("touchend",e=>{ if(tx===null)return; const dx=e.changedTouches[0].clientX - tx; if(Math.abs(dx)>40){ dx>0?nav(-1):nav(1); } tx=null; });
+    })();
+  </script>
+</div>
+<!-- /Little Wolf Museum – Drop-in Gallery Block -->
 </html>
