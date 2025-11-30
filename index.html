@@ -42,7 +42,23 @@
     @media(min-width:860px){#lwm-gallery .dialog{grid-template-columns:1.15fr .85fr}}
     #lwm-gallery .left{background:#000}
     #lwm-gallery .left img{width:100%;height:100%;object-fit:contain;background:#000;display:block}
-    #lwm-gallery .right{padding:16px 16px 18px;overflow:auto}
+    #lwm-gallery .right{
+      padding:16px 16px 18px;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden; /* the inner body will scroll instead */
+    }
+    #lwm-gallery .right-body{
+      flex:1 1 auto;
+      overflow:auto;
+      padding-bottom:10px; /* space above footer */
+    }
+    #lwm-gallery .right-footer{
+      flex-shrink:0;
+      padding-top:8px;
+      display:flex;
+      gap:10px;
+    }
     #lwm-gallery .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--muted);margin:4px 0 8px}
     #lwm-gallery .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
     #lwm-gallery .close{position:absolute;top:16px;right:16px}
@@ -58,25 +74,29 @@
     <div class="dialog" role="document">
       <button id="lwm-dlg-close" class="btn close" aria-label="Close details">✕</button>
       <div class="left"><img id="lwm-dlg-img" alt="" /></div>
-      <div class="right">
-        <h3 id="lwm-dlg-title" style="margin:6px 0 4px;font-size:24px"></h3>
-        <div id="lwm-dlg-artist" class="pill"></div>
-        <div class="meta-row">
-          <div><strong>Medium:</strong> <span id="lwm-dlg-medium"></span></div>
-          <div><strong>Year:</strong> <span id="lwm-dlg-year"></span></div>
-          <div><strong>Dimensions:</strong> <span id="lwm-dlg-dim"></span></div>
-          <div><strong>Price:</strong> <span id="lwm-dlg-price"></span></div>
+        <div class="right">
+            <div class="right-body">
+                <h3 id="lwm-dlg-title" style="margin:6px 0 4px;font-size:24px"></h3>
+                <div id="lwm-dlg-artist" class="pill"></div>
+                <div class="meta-row">
+                    <div><strong>Medium:</strong> <span id="lwm-dlg-medium"></span></div>
+                    <div><strong>Year:</strong> <span id="lwm-dlg-year"></span></div>
+                    <div><strong>Dimensions:</strong> <span id="lwm-dlg-dim"></span></div>
+                    <div><strong>Price:</strong> <span id="lwm-dlg-price"></span></div>
+                </div>
+                <p id="lwm-dlg-bio" style="margin-top:8px"></p>
+                <div class="meta-row">
+                    <div><strong>Availability:</strong> <span id="lwm-dlg-avail"></span></div>
+                    <div><strong>Contact:</strong> <span id="lwm-dlg-contact"></span></div>
+                </div>
+            </div>
+
+            <div class="right-footer">
+                <button class="btn" id="lwm-prev">◀ Prev</button>
+                <button class="btn" id="lwm-next">Next ▶</button>
+            </div>
         </div>
-        <p id="lwm-dlg-bio" style="margin-top:8px"></p>
-        <div class="meta-row">
-          <div><strong>Availability:</strong> <span id="lwm-dlg-avail"></span></div>
-          <div><strong>Contact:</strong> <span id="lwm-dlg-contact"></span></div>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:8px">
-          <button class="btn" id="lwm-prev">◀ Prev</button>
-          <button class="btn" id="lwm-next">Next ▶</button>
-        </div>
-      </div>
+
     </div>
   </div>
 
