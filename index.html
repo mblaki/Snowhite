@@ -38,8 +38,21 @@
     /* Modal */
     #lwm-gallery .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:999999}
     #lwm-gallery .overlay[aria-hidden="false"]{display:flex}
-    #lwm-gallery .dialog{width:min(100%,940px);max-height:90vh;background:#fff;border-radius:18px;overflow:hidden;display:grid;grid-template-columns:1fr;box-shadow:var(--shadow)}
-    @media(min-width:860px){#lwm-gallery .dialog{grid-template-columns:1.15fr .85fr}}
+    #lwm-gallery .dialog{
+        width:min(100%,940px);
+        max-height:90vh;
+        background:#fff;
+        border-radius:18px;
+        overflow:hidden;
+        display:grid;
+        grid-template-columns:1fr;
+        box-shadow:var(--shadow)
+    }
+    #lwm-gallery .dialog,
+    #lwm-gallery .right,
+    #lwm-gallery .left{
+      min-height: 0; /* important for flex/grid children on mobile */
+    }
     #lwm-gallery .left{background:#000}
     #lwm-gallery .left img{width:100%;height:100%;object-fit:contain;background:#000;display:block}
     #lwm-gallery .right{
@@ -49,9 +62,11 @@
       overflow:hidden; /* the inner body will scroll instead */
     }
     #lwm-gallery .right-body{
-      flex:1 1 auto;
-      overflow:auto;
-      padding-bottom:10px; /* space above footer */
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-bottom: 10px; /* space above footer */
+      -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
     }
     #lwm-gallery .right-footer{
       flex-shrink:0;
@@ -62,6 +77,17 @@
     #lwm-gallery .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--muted);margin:4px 0 8px}
     #lwm-gallery .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
     #lwm-gallery .close{position:absolute;top:16px;right:16px}
+    @media (max-width: 600px){
+      #lwm-gallery .overlay{
+        align-items: stretch; /* dialog can take full height */
+      }
+      #lwm-gallery .dialog{
+        max-height: 100vh;
+      }
+    }
+    @media(min-width:860px){#lwm-gallery .dialog{grid-template-columns:1.15fr .85fr}}
+
+
   </style>
 
   <div class="lg-wrap">
@@ -331,10 +357,6 @@
           if(e.key==="ArrowRight") nav(1);
         }
       });
-      // Touch swipe
-      //let tx=null;
-      //overlay.addEventListener("touchstart",e=>{tx=e.changedTouches[0].clientX});
-      //overlay.addEventListener("touchend",e=>{ if(tx===null)return; const dx=e.changedTouches[0].clientX - tx; if(Math.abs(dx)>40){ dx>0?nav(-1):nav(1); } tx=null; });
     })();
   </script>
 </div>
