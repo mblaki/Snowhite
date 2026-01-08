@@ -15,30 +15,68 @@
 </head>
 <!-- Little Wolf Museum – Drop-in Gallery Block -->
 <div id="lwm-gallery" role="region" aria-label="Little Wolf Museum Gallery">
-  <style>
-    /* ---- Scoped styles ---- */
-    #lwm-gallery { --gold:#C9A227; --black:#0A0A0A; --white:#fff; --muted:#f3f2ed; --radius:14px; --shadow:0 10px 24px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.08); font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:var(--black); }
-    #lwm-gallery .lg-wrap{max-width:1100px;margin:0 auto;padding:20px;}
-    #lwm-gallery h2{margin:0 0 12px;font-size:28px;}
-    #lwm-gallery .grid{display:grid;gap:12px}
-    @media(min-width:540px){#lwm-gallery .grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:860px){#lwm-gallery .grid{grid-template-columns:repeat(3,1fr)}}
-    @media(min-width:1100px){#lwm-gallery .grid{grid-template-columns:repeat(4,1fr)}}
-    #lwm-gallery .card{background:#fff;border:1px solid #ececec;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-    #lwm-gallery .thumb{aspect-ratio:4/3;background:#fafafa;overflow:hidden}
-    #lwm-gallery .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    #lwm-gallery .meta{padding:12px 14px 14px}
-    #lwm-gallery .title{font-weight:700;margin-bottom:4px}
-    #lwm-gallery .artist{opacity:.85}
-    #lwm-gallery .price{margin-top:6px;font-weight:700}
-    #lwm-gallery .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid #e6e6e6;background:var(--white);cursor:pointer;text-decoration:none;font-weight:600}
-    #lwm-gallery .btn.gold{background:var(--gold);border-color:var(--gold);color:#161616}
-    #lwm-gallery .btn.gold:hover{filter:brightness(.95)}
-    #lwm-gallery .btn:focus{outline:3px solid #2E90FA;outline-offset:2px}
-    /* Modal */
-    #lwm-gallery .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:999999}
-    #lwm-gallery .overlay[aria-hidden="false"]{display:flex}
-    #lwm-gallery .dialog{
+    <style>
+        /* ---- Scoped styles ---- */
+        #lwm-gallery {
+        --gold:#C9A227;
+        --black:#0A0A0A;
+        --white:#fff;
+        --muted:#f3f2ed;
+        --radius:14px;
+        --shadow:0 10px 24px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.08);
+        font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+        color:var(--black);
+        }
+        #lwm-gallery .lg-wrap{max-width:1100px;margin:0 auto;padding:20px;}
+        #lwm-gallery h2{margin:0 0 12px;font-size:28px;}
+        #lwm-gallery .grid{display:grid;gap:12px}
+        @media(min-width:540px){#lwm-gallery .grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:860px){#lwm-gallery .grid{grid-template-columns:repeat(3,1fr)}}
+        @media(min-width:1100px){#lwm-gallery .grid{grid-template-columns:repeat(4,1fr)}}
+        #lwm-gallery .card{
+        background:#fff;
+        border:1px solid #ececec;
+        border-radius:var(--radius);
+        overflow:hidden;
+        box-shadow:var(--shadow);
+        display:flex;
+        flex-direction:column
+        }
+        #lwm-gallery .thumb{aspect-ratio:4/3;background:#fafafa;overflow:hidden}
+        #lwm-gallery .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+        #lwm-gallery .meta{padding:12px 14px 14px}
+        #lwm-gallery .title{font-weight:700;margin-bottom:4px}
+        #lwm-gallery .artist{opacity:.85}
+        #lwm-gallery .price{margin-top:6px;font-weight:700}
+        #lwm-gallery .btn{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:10px 14px;
+        border-radius:10px;
+        border:1px solid #e6e6e6;
+        background:var(--white);
+        cursor:pointer;
+        text-decoration:none;
+        font-weight:600
+        }
+        #lwm-gallery .btn.gold{background:var(--gold);border-color:var(--gold);color:#161616}
+        #lwm-gallery .btn.gold:hover{filter:brightness(.95)}
+        #lwm-gallery .btn:focus{outline:3px solid #2E90FA;outline-offset:2px}
+
+        /* Modal */
+        #lwm-gallery .overlay{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.6);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        padding:18px;
+        z-index:999999
+        }
+        #lwm-gallery .overlay[aria-hidden="false"]{display:flex}
+        #lwm-gallery .dialog{
         width:min(100%,940px);
         max-height:90vh;
         background:#fff;
@@ -47,318 +85,386 @@
         display:grid;
         grid-template-columns:1fr;
         box-shadow:var(--shadow)
-    }
-    #lwm-gallery .dialog,
-    #lwm-gallery .right,
-    #lwm-gallery .left{
-      min-height: 0; /* important for flex/grid children on mobile */
-    }
-    #lwm-gallery .left{background:#000}
-    #lwm-gallery .left img{width:100%;height:100%;object-fit:contain;background:#000;display:block}
-    #lwm-gallery .right{
-      padding:16px 16px 18px;
-      display:flex;
-      flex-direction:column;
-      overflow:hidden; /* the inner body will scroll instead */
-    }
-    #lwm-gallery .right-body{
-      flex: 1 1 auto;
-      min-height: 0;
-      overflow-y: auto;
-      padding-bottom: 10px; /* space above footer */
-      -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
-    }
-    #lwm-gallery .right-footer{
-      flex-shrink:0;
-      padding-top:8px;
-      display:flex;
-      gap:10px;
-    }
-    #lwm-gallery .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--muted);margin:4px 0 8px}
-    #lwm-gallery .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
-    #lwm-gallery .close{position:absolute;top:16px;right:16px}
-    @media (max-width: 600px){
-      #lwm-gallery .overlay{
-        align-items: stretch; /* dialog can take full height */
-      }
-      #lwm-gallery .dialog{
-        max-height: 100vh;
-      }
-    }
-    @media(min-width:860px){#lwm-gallery .dialog{grid-template-columns:1.15fr .85fr}}
+        }
+        #lwm-gallery .dialog,
+        #lwm-gallery .right,
+        #lwm-gallery .left{
+        min-height:0; /* important for flex/grid children on mobile */
+        }
+        #lwm-gallery .left{background:#000}
+        #lwm-gallery .left img{
+        width:100%;
+        height:100%;
+        object-fit:contain;
+        background:#000;
+        display:block
+        }
+        #lwm-gallery .right{
+        padding:16px 16px 18px;
+        display:flex;
+        flex-direction:column;
+        overflow:hidden; /* the inner body will scroll instead */
+        }
+        #lwm-gallery .right-body{
+        flex:1 1 auto;
+        min-height:0;
+        overflow-y:auto;
+        padding-bottom:10px; /* space above footer */
+        -webkit-overflow-scrolling:touch; /* smooth scroll on iOS */
+        }
+        #lwm-gallery .right-footer{
+        flex-shrink:0;
+        padding-top:8px;
+        display:flex;
+        gap:10px;
+        }
+        #lwm-gallery .pill{
+        display:inline-block;
+        padding:6px 10px;
+        border-radius:999px;
+        background:var(--muted);
+        margin:4px 0 8px
+        }
+        #lwm-gallery .meta-row{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin:10px 0
+        }
+        #lwm-gallery .close{position:absolute;top:16px;right:16px}
 
+        /* Purchasing block */
+        #lwm-gallery .purchase-block{
+        margin-top:10px;
+        padding:10px 12px;
+        border-radius:10px;
+        background:var(--muted);
+        font-size:0.9rem;
+        line-height:1.4;
+        }
+        #lwm-gallery .purchase-block-title{
+        font-weight:700;
+        margin-bottom:4px;
+        display:block;
+        }
 
-  </style>
+        @media (max-width: 600px){
+        #lwm-gallery .overlay{
+        align-items:stretch; /* dialog can take full height */
+        }
+        #lwm-gallery .dialog{
+        max-height:100vh;
+        }
+        #lwm-gallery .meta-row{
+        grid-template-columns:1fr;
+        }
+        }
+        @media(min-width:860px){
+        #lwm-gallery .dialog{grid-template-columns:1.15fr .85fr}
+        }
+    </style>
 
-  <div class="lg-wrap">
-    <h2>Gallery</h2>
-    <div class="grid" id="lwm-grid" aria-live="polite"></div>
-  </div>
+    <div class="lg-wrap">
+        <h2>Gallery</h2>
+        <div class="grid" id="lwm-grid" aria-live="polite"></div>
+    </div>
 
-  <!-- Modal -->
-  <div id="lwm-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lwm-dlg-title">
-    <div class="dialog" role="document">
-      <button id="lwm-dlg-close" class="btn close" aria-label="Close details">✕</button>
-      <div class="left"><img id="lwm-dlg-img" alt="" /></div>
-        <div class="right">
-            <div class="right-body">
-                <h3 id="lwm-dlg-title" style="margin:6px 0 4px;font-size:24px"></h3>
-                <div id="lwm-dlg-artist" class="pill"></div>
-                <div class="meta-row">
-                    <div><strong>Medium:</strong> <span id="lwm-dlg-medium"></span></div>
-                    <div><strong>Year:</strong> <span id="lwm-dlg-year"></span></div>
-                    <div><strong>Dimensions:</strong> <span id="lwm-dlg-dim"></span></div>
-                    <div><strong>Price:</strong> <span id="lwm-dlg-price"></span></div>
+    <!-- Modal -->
+    <div id="lwm-overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lwm-dlg-title">
+        <div class="dialog" role="document">
+            <button id="lwm-dlg-close" class="btn close" aria-label="Close details">✕</button>
+            <div class="left"><img id="lwm-dlg-img" alt="" /></div>
+            <div class="right">
+                <div class="right-body">
+                    <h3 id="lwm-dlg-title" style="margin:6px 0 4px;font-size:24px"></h3>
+                    <div id="lwm-dlg-artist" class="pill"></div>
+                    <div class="meta-row">
+                        <div><strong>Medium:</strong> <span id="lwm-dlg-medium"></span></div>
+                        <div><strong>Year:</strong> <span id="lwm-dlg-year"></span></div>
+                        <div><strong>Dimensions:</strong> <span id="lwm-dlg-dim"></span></div>
+                        <div><strong>Price:</strong> <span id="lwm-dlg-price"></span></div>
+                    </div>
+                    <p id="lwm-dlg-bio" style="margin-top:8px"></p>
+                    <div class="meta-row">
+                        <div><strong>Availability:</strong> <span id="lwm-dlg-avail"></span></div>
+                    </div>
+                    <div id="lwm-dlg-purchase" class="purchase-block"></div>
                 </div>
-                <p id="lwm-dlg-bio" style="margin-top:8px"></p>
-                <div class="meta-row">
-                    <div><strong>Availability:</strong> <span id="lwm-dlg-avail"></span></div>
-                    <div><strong>Contact:</strong> <span id="lwm-dlg-contact"></span></div>
-                </div>
-            </div>
 
-            <div class="right-footer">
-                <button class="btn" id="lwm-prev">◀ Prev</button>
-                <button class="btn" id="lwm-next">Next ▶</button>
+                <div class="right-footer">
+                    <button class="btn" id="lwm-prev">◀ Prev</button>
+                    <button class="btn" id="lwm-next">Next ▶</button>
+                </div>
             </div>
         </div>
-
     </div>
-  </div>
 
-  <script>
-    (function(){
-      // ---- Config: update BASE if your images live elsewhere ----
-      const BASE = "https://mblaki.github.io/Snowhite/assets/";
+    <script>
+        (function(){
+        // ---- Config: update BASE if your images live elsewhere ----
+        const BASE = "https://mblaki.github.io/Snowhite/assets/";
+        const DEE_CONTACT = "072 473 4157";
 
-      // ---- Data (10 works; 2 artists: Billy 1–5, Fok 6–10) ----
-      const ARTISTS = {
+        // ---- Artists ----
+        const ARTISTS = {
         "Peter Southworth": {
-          bio: "Peter is a lekke ou, when he's not making art he's slukking branewyn en coke like they going to run out tomorrow.",
-          email: "peter@example.com",
-          whatsapp: "+27 12 345 6789"
+        bio: "Peter Southworth grew up in the Mountain Kingdom of Lesotho and attended Hilton College before studying Graphic Design at the Michaelis School of Fine Art. He spent much of his career as a Creative Director in the advertising industry, where his work was recognised with several major awards, including the Cannes Film and Advertising Festival Prix Nationale and the Loerie Grand Prix. Peter later lectured for four years at the Red & Yellow School of Marketing. Now based in Hermanus, he continues to consult for select clients, but increasingly devotes his time to painting — finding quiet pleasure in making work that is personal, observational, and rooted in place.",
+        email: "petersouthworth232@gmail.com",
+        whatsapp: "+27 79 526 557"
         },
         "Adriaan S de Lange": {
-          bio: "I've personally never met Adriaan, but he sounds like a decent oke... Or she, IDK..",
-          email: "adriaan@example.com",
-          whatsapp: "+27 98 765 4321"
+        bio: "Adriaan S de Lange is a Namibian-born painter, now based in Stellenbosch, whose largely self-taught practice in oils spans modern abstracts, still lifes, wildlife and his much-loved seascapes. Working with bold, bright colour and a strong sense of composition, he often creates quietly cinematic beach scenes featuring faceless figures and recurring motifs, inviting the viewer to complete the story. Trained in counselling psychology, he brings a keen emotional awareness to his work, using humour, spaciousness and colour to explore freedom, joy and inner life – which has made his limited body of paintings highly sought after.",
+        email: "",
+        whatsapp: ""
         },
         "Toinette Lindley": {
-          bio: "Toinette has magic hands/fingers! Oh MY word! You must see what she can do with them.",
-          email: "toinette@example.com",
-          whatsapp: "+27 33 333 3333"
+        bio: "Toinette Lindley of TLC Ceramics is a hand-building ceramic artist with a background in interior design. She works primarily in porcelain, creating whimsical, organic pieces inspired by South Africa’s Cape Floristic Region, including fynbos and local fauna. Her work blends everyday iconic forms with hand-drawn and hand-painted designs, using underglazes and oxides on porcelain as her canvas.",
+        email: "",
+        whatsapp: "+27 83 923 6476"
         },
         "Nicole Liebenberg": {
-          bio: "Nicole likes it wet and wild, if it's waterbased she'll use it - if you know what i mean.",
-          email: "nicole@example.com",
-          whatsapp: "+27 44 444 4444"
+        bio: "Nicole Liebenberg is a South African multi-medium artist who specialises in miniature paintings and jewellery. You can browse her creations on her business website twistedforestcreations.co.za or on Instagram @twistedforest.nl.",
+        email: "",
+        whatsapp: ""
         },
         "Christi Roux": {
-          bio: "A chakra-shaking throat-singer whose tiny photos channel big spiritual chaos. A proud advocate for radical self-expression, he believes every soul deserves to vibrate loudly and fabulously.",
-          email: "christi@example.com",
-          whatsapp: "+27 44 444 4444"
-        },
-      };
-
-      const WORKS = [
-        {
-            id:"img1",
-            file: BASE+"bloekomboom.jpg",
-            title:"Bloekombook",
-            artist:"Peter Southworth",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"10 × 10 cm",
-            price:350,
-            available:true
-        },
-        {
-            id:"img2",
-            file: BASE+"grotto_beach_skies.jpg",
-            title:"Grotto Beach Skies",
-            artist:"Peter Southworth",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"8 × 6 cm",
-            price:300,
-            available:true
-        },
-        {
-            id:"img3",
-            file: BASE+"lagoon.jpg",
-            title:"Lagoon",
-            artist:"Peter Southworth",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"8 × 6 cm",
-            price:300,
-            available:false
-        },
-        {
-            id:"img4",
-            file: BASE+"grotto_beach.jpg",
-            title:"Grotto Beach",
-            artist:"Peter Southworth",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"10 × 8 cm",
-            price:450,
-            available:true
-        },
-        {
-            id:"img5",
-            file: BASE+"daffodils.jpg",
-            title:"Daffodils",
-            artist:"Peter Southworth",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"6 × 8 cm",
-            price:200,
-            available:true
-        },
-        {
-            id:"img6",
-            file: BASE+"yet_another_day.jpg",
-            title:"Yet Another Day",
-            artist:"Adriaan S de Lange",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"10 × 10 cm",
-            price:800,
-            available:true
-        },
-        {
-            id:"img7",
-            file: BASE+"waiting_no_more.jpg",
-            title:"Waiting No More",
-            artist:"Adriaan S de Lange",
-            year:2025,
-            medium:"Oil on canvas",
-            dimensions:"12 × 9 cm",
-            price:950,
-            available:true
-        },
-        {
-            id:"img8",
-            file: BASE+"owl_front_1.jpg",
-            title:"Mouse!",
-            artist:"Toinette Lindley",
-            year:2025,
-            medium:"Clay",
-            dimensions:"6.5 × 11.5 cm",
-            price:700,
-            available:true
-        },
-        {
-            id:"img9",
-            file: BASE+"between_mountains_and_fynbos.png",
-            title:"Between Mountains and Fynbos",
-            artist:"Nicole Liebenberg",
-            year:2025,
-            medium:"Clay",
-            dimensions:"3 × 2 cm",
-            price:530,
-            available:true
-        },
-        {
-            id:"img10",
-            file: BASE+"a_moments_peace.png",
-            title:"A Moment's Peace",
-            artist:"Nicole Liebenberg",
-            year:2025,
-            medium:"Clay",
-            dimensions:"3 × 2 cm",
-            price:350,
-            available:true
+        bio: "Christie loves nature, throat singing and photography.",
+        email: "",
+        whatsapp: ""
         }
-      ];
+        };
 
-      // ---- Elements ----
-      const root = document.getElementById("lwm-gallery");
-      const grid = document.getElementById("lwm-grid");
-      const overlay = document.getElementById("lwm-overlay");
-      const dlgImg = document.getElementById("lwm-dlg-img");
-      const dlgTitle = document.getElementById("lwm-dlg-title");
-      const dlgArtist = document.getElementById("lwm-dlg-artist");
-      const dlgMedium = document.getElementById("lwm-dlg-medium");
-      const dlgYear = document.getElementById("lwm-dlg-year");
-      const dlgDim = document.getElementById("lwm-dlg-dim");
-      const dlgPrice = document.getElementById("lwm-dlg-price");
-      const dlgBio = document.getElementById("lwm-dlg-bio");
-      const dlgAvail = document.getElementById("lwm-dlg-avail");
-      const dlgContact = document.getElementById("lwm-dlg-contact");
-      const btnPrev = document.getElementById("lwm-prev");
-      const btnNext = document.getElementById("lwm-next");
-      const btnClose = document.getElementById("lwm-dlg-close");
-      let currentIndex = 0, lastFocused = null;
+        // ---- Pieces ----
+        const WORKS = [
+        {
+        id:"img1",
+        file: BASE+"bloekomboom.jpg",
+        thumbs: BASE+"bloekomboom_TN.jpg",
+        title:"Bloekombook",
+        artist:"Peter Southworth",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"10 × 10 cm",
+        price:350,
+        available:true
+        },
+        {
+        id:"img2",
+        file: BASE+"grotto_beach_skies.jpg",
+        thumbs: BASE+"grotto_beach_skies_TN.jpg",
+        title:"Grotto Beach Skies",
+        artist:"Peter Southworth",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"8 × 6 cm",
+        price:300,
+        available:true
+        },
+        {
+        id:"img3",
+        file: BASE+"lagoon.jpg",
+        thumbs: BASE+"lagoon_TN.jpg",
+        title:"Lagoon",
+        artist:"Peter Southworth",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"8 × 6 cm",
+        price:300,
+        available:false
+        },
+        {
+        id:"img4",
+        file: BASE+"grotto_beach.jpg",
+        thumbs: BASE+"grotto_beach_TN.jpg",
+        title:"Grotto Beach",
+        artist:"Peter Southworth",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"10 × 8 cm",
+        price:450,
+        available:true
+        },
+        {
+        id:"img5",
+        file: BASE+"daffodils.jpg",
+        thumbs: BASE+"daffodils.jpg",
+        title:"Daffodils",
+        artist:"Peter Southworth",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"6 × 8 cm",
+        price:200,
+        available:true
+        },
+        {
+        id:"img6",
+        file: BASE+"yet_another_day.jpg",
+        thumbs: BASE+"yet_another_day_TN.jpg",
+        title:"Yet Another Day",
+        artist:"Adriaan S de Lange",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"10 × 10 cm",
+        price:800,
+        available:true
+        },
+        {
+        id:"img7",
+        file: BASE+"waiting_no_more.jpg",
+        thumbs: BASE+"waiting_no_more_TN.jpg",
+        title:"Waiting No More",
+        artist:"Adriaan S de Lange",
+        year:2025,
+        medium:"Oil on canvas",
+        dimensions:"12 × 9 cm",
+        price:950,
+        available:true
+        },
+        {
+        id:"img8",
+        file: BASE+"owl_front_1.jpg",
+        thumbs: BASE+"owl_front_1_TN.jpg",
+        title:"Mouse!",
+        artist:"Toinette Lindley",
+        year:2025,
+        medium:"Clay",
+        dimensions:"6.5 × 11.5 cm",
+        price:700,
+        available:true
+        },
+        {
+        id:"img9",
+        file: BASE+"between_mountains_and_fynbos.png",
+        thumbs: BASE+"between_mountains_and_fynbos_TN.png",
+        title:"Between Mountains and Fynbos",
+        artist:"Nicole Liebenberg",
+        year:2025,
+        medium:"Clay",
+        dimensions:"3 × 2 cm",
+        price:530,
+        available:true
+        },
+        {
+        id:"img10",
+        file: BASE+"a_moments_peace.png",
+        thumbs: BASE+"a_moments_peace_TN.png",
+        title:"A Moment's Peace",
+        artist:"Nicole Liebenberg",
+        year:2025,
+        medium:"Clay",
+        dimensions:"3 × 2 cm",
+        price:350,
+        available:true
+        }
+        ];
 
-      // ---- Render grid ----
-      WORKS.forEach(w => grid.appendChild(card(w)));
+        // ---- Elements ----
+        const root = document.getElementById("lwm-gallery");
+        const grid = document.getElementById("lwm-grid");
+        const overlay = document.getElementById("lwm-overlay");
+        const dlgImg = document.getElementById("lwm-dlg-img");
+        const dlgTitle = document.getElementById("lwm-dlg-title");
+        const dlgArtist = document.getElementById("lwm-dlg-artist");
+        const dlgMedium = document.getElementById("lwm-dlg-medium");
+        const dlgYear = document.getElementById("lwm-dlg-year");
+        const dlgDim = document.getElementById("lwm-dlg-dim");
+        const dlgPrice = document.getElementById("lwm-dlg-price");
+        const dlgBio = document.getElementById("lwm-dlg-bio");
+        const dlgAvail = document.getElementById("lwm-dlg-avail");
+        const dlgPurchase = document.getElementById("lwm-dlg-purchase");
+        const btnPrev = document.getElementById("lwm-prev");
+        const btnNext = document.getElementById("lwm-next");
+        const btnClose = document.getElementById("lwm-dlg-close");
+        let currentIndex = 0, lastFocused = null;
 
-      function card(w){
+        // ---- Render grid ----
+        WORKS.forEach(function(w){
+        grid.appendChild(card(w));
+        });
+
+        function card(w){
         const el = document.createElement("article");
         el.className = "card";
-        el.innerHTML = `
-          <div class="thumb"><img loading="lazy" src="${w.file}" alt="${w.title} by ${w.artist}"></div>
-          <div class="meta">
-            <div class="title">${w.title}</div>
-            <div class="artist">${w.artist} • ${w.year}</div>
-            <div class="price">R ${w.price.toLocaleString('en-ZA')}</div>
-            <button class="btn gold" data-open="${w.id}">View details</button>
-          </div>`;
-        el.querySelector("[data-open]").addEventListener("click",()=>openModal(w));
-        el.querySelector(".thumb").addEventListener("click",()=>openModal(w));
-        el.tabIndex = 0; el.addEventListener("keydown",e=>{ if(e.key==="Enter") openModal(w); });
+        el.innerHTML =
+        '<div class="thumb"><img loading="lazy" src="' + w.file + '" alt="' + w.title + ' by ' + w.artist + '"></div>' +
+        '<div class="meta">' +
+        '<div class="title">' + w.title + '</div>' +
+        '<div class="artist">' + w.artist + ' • ' + w.year + '</div>' +
+        '<div class="price">R ' + w.price.toLocaleString("en-ZA") + '</div>' +
+        '<button class="btn gold" data-open="' + w.id + '">View details</button>' +
+        '</div>';
+        el.querySelector("[data-open]").addEventListener("click", function(){ openModal(w); });
+        el.querySelector(".thumb").addEventListener("click", function(){ openModal(w); });
+        el.tabIndex = 0;
+        el.addEventListener("keydown", function(e){ if(e.key === "Enter") openModal(w); });
         return el;
-      }
+        }
 
-      // ---- Modal logic ----
-      function openModalByIndex(i){ openModal(WORKS[i]); }
-      function openModal(w){
-        currentIndex = WORKS.findIndex(x=>x.id===w.id);
+        // ---- Modal logic ----
+        function openModalByIndex(i){ openModal(WORKS[i]); }
+
+        function openModal(w){
+        currentIndex = WORKS.findIndex(function(x){ return x.id === w.id; });
         lastFocused = document.activeElement;
 
         dlgImg.src = w.file;
-        dlgImg.alt = `${w.title} by ${w.artist}`;
+        dlgImg.alt = w.title + " by " + w.artist;
         dlgTitle.textContent = w.title;
         dlgArtist.textContent = w.artist;
         dlgMedium.textContent = w.medium;
         dlgYear.textContent = w.year;
         dlgDim.textContent = w.dimensions;
         dlgPrice.textContent = "R " + w.price.toLocaleString("en-ZA");
-        const a = ARTISTS[w.artist];
-        dlgBio.textContent = a.bio;
+
+        const a = ARTISTS[w.artist] || { bio:"", email:"", whatsapp:"" };
+        dlgBio.textContent = a.bio || "";
         dlgAvail.textContent = w.available ? "Available" : "Sold";
-        dlgContact.textContent = `${a.email} · ${a.whatsapp}`;
+
+        // Purchasing & commissions block
+        var artistContact = [];
+        if (a.email) artistContact.push(a.email);
+        if (a.whatsapp) artistContact.push(a.whatsapp);
+        artistContact = artistContact.join(" · ");
+
+        var purchaseHtml = "";
+        purchaseHtml += '<span class="purchase-block-title">Purchasing & commissions</span>';
+        purchaseHtml += '<div>For immediate collection, purchase directly through Little Wolf Museum\'s curators at Mr. Write, with all proceeds going to the artist.</div>';
+        purchaseHtml += '<div><strong>To purchase a piece:</strong> contact Dee at Mr. Write on ' + DEE_CONTACT + '.</div>';
+        if (artistContact) {
+        purchaseHtml += '<div><strong>To request a commission:</strong> contact the artist directly: ' + artistContact + '</div>';
+        }
+        dlgPurchase.innerHTML = purchaseHtml;
 
         overlay.setAttribute("aria-hidden","false");
-        document.body.style.overflow = "hidden";
         btnClose.focus();
-      }
-      function closeModal(){
+        }
+
+        function closeModal(){
         overlay.setAttribute("aria-hidden","true");
-        document.body.style.overflow = "";
         if(lastFocused) lastFocused.focus();
-      }
-      function nav(dir){
+        }
+
+        function nav(dir){
         currentIndex = (currentIndex + dir + WORKS.length) % WORKS.length;
         openModalByIndex(currentIndex);
-      }
-
-      // Events
-      overlay.addEventListener("click",e=>{ if(e.target===overlay) closeModal(); });
-      btnClose.addEventListener("click", closeModal);
-      btnPrev.addEventListener("click", ()=>nav(-1));
-      btnNext.addEventListener("click", ()=>nav(1));
-      window.addEventListener("keydown", e=>{
-        if(overlay.getAttribute("aria-hidden")==="false"){
-          if(e.key==="Escape") closeModal();
-          if(e.key==="ArrowLeft") nav(-1);
-          if(e.key==="ArrowRight") nav(1);
         }
-      });
-    })();
-  </script>
+
+        // Events
+        overlay.addEventListener("click", function(e){
+        if(e.target === overlay) closeModal();
+        });
+        btnClose.addEventListener("click", closeModal);
+        btnPrev.addEventListener("click", function(){ nav(-1); });
+        btnNext.addEventListener("click", function(){ nav(1); });
+        window.addEventListener("keydown", function(e){
+        if(overlay.getAttribute("aria-hidden") === "false"){
+        if(e.key === "Escape") closeModal();
+        if(e.key === "ArrowLeft") nav(-1);
+        if(e.key === "ArrowRight") nav(1);
+        }
+        });
+        })();
+    </script>
 </div>
 <!-- /Little Wolf Museum – Drop-in Gallery Block -->
 </html>
