@@ -148,6 +148,41 @@
         display:block;
         }
 
+        /* Contact Block */
+        #lwm-gallery .contact-buttons{
+          display:flex;
+          flex-wrap:wrap;
+          gap:8px;
+          margin-top:6px;
+        }
+
+        #lwm-gallery .contact-btn{
+          display:inline-flex;
+          align-items:center;
+          gap:6px;
+          padding:8px 12px;
+          border-radius:999px;
+          background:#fff;
+          border:1px solid #e0e0e0;
+          text-decoration:none;
+          font-weight:600;
+          font-size:.9rem;
+          color:#161616;
+        }
+
+#lwm-gallery .contact-btn:hover{
+  background:#f6f6f6;
+}
+
+#lwm-gallery .contact-btn svg{
+  width:16px;
+  height:16px;
+  display:block;
+}
+
+
+        /* Media block */
+
         @media (max-width: 600px){
         #lwm-gallery .overlay{
         align-items:stretch; /* dialog can take full height */
@@ -287,7 +322,7 @@
         {
         id:"img5",
         file: BASE+"daffodils.jpg",
-        thumbs: BASE+"daffodils.jpg",
+        thumbs: BASE+"daffodils_TN.jpg",
         title:"Daffodils",
         artist:"Peter Southworth",
         year:2025,
@@ -334,8 +369,8 @@
         },
         {
         id:"img9",
-        file: BASE+"between_mountains_and_fynbos.png",
-        thumbs: BASE+"between_mountains_and_fynbos_TN.png",
+        file: BASE+"between_mountains.png",
+        thumbs: BASE+"between_mountains_TN.png",
         title:"Between Mountains and Fynbos",
         artist:"Nicole Liebenberg",
         year:2025,
@@ -420,19 +455,63 @@
         dlgAvail.textContent = w.available ? "Available" : "Sold";
 
         // Purchasing & commissions block
-        var artistContact = [];
-        if (a.email) artistContact.push(a.email);
-        if (a.whatsapp) artistContact.push(a.whatsapp);
-        artistContact = artistContact.join(" · ");
+<!--        var artistContact = [];-->
+<!--        if (a.email) artistContact.push(a.email);-->
+<!--        if (a.whatsapp) artistContact.push(a.whatsapp);-->
+<!--        artistContact = artistContact.join(" · ");-->
 
-        var purchaseHtml = "";
-        purchaseHtml += '<span class="purchase-block-title">Purchasing & commissions</span>';
-        purchaseHtml += '<div>For immediate collection, purchase directly through Little Wolf Museum\'s curators at Mr. Write, with all proceeds going to the artist.</div>';
-        purchaseHtml += '<div><strong>To purchase a piece:</strong> contact Dee at Mr. Write on ' + DEE_CONTACT + '.</div>';
-        if (artistContact) {
-        purchaseHtml += '<div><strong>To request a commission:</strong> contact the artist directly: ' + artistContact + '</div>';
-        }
-        dlgPurchase.innerHTML = purchaseHtml;
+<!--        var purchaseHtml = "";-->
+<!--        purchaseHtml += '<span class="purchase-block-title">Purchasing & commissions</span>';-->
+<!--        purchaseHtml += '<div>For immediate collection, purchase directly through Little Wolf Museum\'s curators at Mr. Write, with all proceeds going to the artist.</div>';-->
+<!--        purchaseHtml += '<div><strong>To purchase a piece:</strong> contact Dee at Mr. Write on ' + DEE_CONTACT + '.</div>';-->
+<!--        if (artistContact) {-->
+<!--        purchaseHtml += '<div><strong>To request a commission:</strong> contact the artist directly: ' + artistContact + '</div>';-->
+<!--        }-->
+<!--        dlgPurchase.innerHTML = purchaseHtml;-->
+
+    // Purchasing & commissions block
+    var purchaseHtml = "";
+    purchaseHtml += '<span class="purchase-block-title">Purchasing & commissions</span>';
+    purchaseHtml += '<div>For immediate collection, purchase directly through Little Wolf Museum\'s curators at Mr. Write, with all proceeds going to the artist.</div>';
+
+    // ---- Dee (Mr. Write) contact ----
+    var deeButtons = '';
+    if (DEE_CONTACT) {
+      var deeWhats = DEE_CONTACT.replace(/\D/g,'');
+      deeButtons +=
+        '<a class="contact-btn" href="https://wa.me/' + deeWhats + '" target="_blank" rel="noopener">' +
+          whatsappIcon() + ' WhatsApp Dee' +
+        '</a>';
+    }
+
+    purchaseHtml += '<div><strong>To purchase a piece:</strong></div>';
+    purchaseHtml += '<div class="contact-buttons">' + deeButtons + '</div>';
+
+    // ---- Artist contact (commissions) ----
+    var artistButtons = '';
+
+    if (a.email) {
+      artistButtons +=
+        '<a class="contact-btn" href="mailto:' + a.email + '">' +
+          emailIcon() + ' Email artist' +
+        '</a>';
+    }
+
+    if (a.whatsapp) {
+      var wa = a.whatsapp.replace(/\D/g,'');
+      artistButtons +=
+        '<a class="contact-btn" href="https://wa.me/' + wa + '" target="_blank" rel="noopener">' +
+          whatsappIcon() + ' WhatsApp artist' +
+        '</a>';
+    }
+
+    if (artistButtons) {
+      purchaseHtml += '<div style="margin-top:8px"><strong>To request a commission:</strong></div>';
+      purchaseHtml += '<div class="contact-buttons">' + artistButtons + '</div>';
+    }
+
+    dlgPurchase.innerHTML = purchaseHtml;
+
 
         overlay.setAttribute("aria-hidden","false");
         btnClose.focus();
